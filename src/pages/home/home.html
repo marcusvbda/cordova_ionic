@@ -3,12 +3,19 @@
     <ion-title>
       Ionic App
     </ion-title>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  teste
-  <p>
-    teste 2
-  </p>
+  <ion-card *ngFor="let user of users">
+    <ion-card-content >
+      <h1 *ngIf="nome" >{{user.nome}}</h1>
+      <p>{{user.email}}</p>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button (click)="mostraNome()">Mostrar/Esconder Nome</button>
 </ion-content>
+      
