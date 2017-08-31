@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-// import { Validators, FormBuilder } from '@angular/forms';
-import { NgForm } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
+import { ServiceProvider } from '../../providers/service-provider';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -12,31 +13,30 @@ export class HomePage
     users    :any[];
     nome     :boolean = false;
 
-    // constructor(public formBuilder : FormBuilder)
-    constructor()
+    constructor(public formBuilder : FormBuilder,public service : ServiceProvider)
     {
-      this.getDados();  
-      // this.cadastro = this.formBuilder.group(
-      // {
-      //    nome  :["",Validators.required],
-      //    email :["",Validators.required],
-      //    senha :["",Validators.required]
-      // });
+      // this.getDados();  
+      this.cadastro = this.formBuilder.group(
+      {
+         nome  :["",Validators.required],
+         email :["",Validators.required],
+         senha :["",Validators.required]
+      });
     }
 
-    getDados()
+    // inicia processor em outra thread para nao parar a inicialização da page
+    ngOnInit() 
     {
-      this.users=
-      [
-        {
-          nome:"vincius",
-          email:"marcusv.bda@icloud.com"
-        },
-        {
-          nome:"driely",
-          email:"driely.aoyama@hotmail.com"
-        }
-      ];
+      this.getDados();
+    }
+
+    getDados() 
+    {
+      //retorno de Dados
+      this.service.getData().subscribe(
+        data=> this.users = data,
+        err=> console.log(err)
+      );
     }
 
     mostraNome()
@@ -48,9 +48,6 @@ export class HomePage
     {
       console.log(this.cadastro.value);
     }
-
-    postDados2(form)
-    {
-      console.log(form.value);
-    }
+    
 }
+
