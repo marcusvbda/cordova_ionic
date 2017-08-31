@@ -10,6 +10,49 @@
 </ion-header>
 
 <ion-content padding>
+
+  <!-- <h2>Cadastro</h2> -->
+  <!-- <form [formGroup]="cadastro" (ngSubmit)="postDados()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input type="text" name="nome" formControlName="nome"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" name="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Senha</ion-label>
+            <ion-input type="password" name="senha" formControlName="senha"></ion-input>
+          </ion-item>
+          <ion-item>
+              <button [disabled]="cadastro.invalid" ion-button full block color="danger">Enviar</button>
+            </ion-item>
+    </ion-list>
+  </form> -->
+  <h2>Cadastro 2</h2>
+  <form #formulario="ngForm" (ngSubmit)="postDados2(formulario)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input type="text" name="nome" ngModel #nome='ngModel'></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" name="email" ngModel #email='ngModel'></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Senha</ion-label>
+            <ion-input type="password" name="senha" ngModel #senha='ngModel'></ion-input>
+          </ion-item>
+          <ion-item>
+              <button [disabled]="cadastro.invalid" ion-button full block color="danger">Enviar</button>
+            </ion-item>
+    </ion-list>
+  </form>
+  <p>Valor do Formulário {{formulario.value | json}}</p>
+
   <ion-card *ngFor="let user of users">
     <ion-card-content >
       <h1 *ngIf="nome" >{{user.nome}}</h1>
