@@ -28,4 +28,26 @@ export class ServiceProvider
             );
       }
 
+      deleteData(id)
+      {
+            let headers = new Headers({'content-Type' : 'application/x-www-form-urlencoded'});
+            return this.http.post(this.api+"apiDeleta.php",id,{
+               headers  : headers,
+               method   : "POST"
+            }).map(
+                  (res:Response) => {return res.json();}
+            );
+      }
+
+      updateData(data)
+      {
+            let headers = new Headers({'content-Type' : 'application/x-www-form-urlencoded'});
+            return this.http.post(this.api+"apiUpdate.php",data,{
+               headers  : headers,
+               method   : "POST"
+            }).map(
+                  (res:Response) => {return res.json();}
+            );
+      }
+
 }
